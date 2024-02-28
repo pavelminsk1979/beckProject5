@@ -11,6 +11,7 @@ dotenv.config()
 
 const mongoUri = process.env.MONGO_URL;
 if(!mongoUri){
+
     throw new Error('URL not find(file mongoDb.ts:14')
 }
 
