@@ -5,6 +5,7 @@ import {postsRoute} from "./routes/posts-route";
 import {DB} from "./db/db";
 import {blogsCollection, postsCollection} from "./db/mongoDb";
 import {STATUS_CODE} from "./constant-status-code";
+import {usersRoute} from "./routes/users-route";
 
 
 export const app = express()
@@ -15,6 +16,7 @@ app.use(express.json())
 app.use('/videos', videosRoute)
 app.use('/blogs', blogsRoute)
 app.use('/posts', postsRoute)
+app.use('/users', usersRoute)
 
 
 app.delete('/testing/all-data', async (req: Request, res: Response) => {
