@@ -64,7 +64,7 @@ export const userQueryRepository = {
             totalCount,
             items: users.map(userMaper)
         }
-    },
+    }}
 
 
 /*
