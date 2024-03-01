@@ -34,7 +34,7 @@ const users = await userQueryRepository.getUsers(req.query)
 
 
 
-usersRoute.post('/', authMiddleware, postValidationUsers(), errorValidationBlogs, async (req: RequestWithBody<CreateUserModel>, res: Response):Promise<OutputUser| null> => {
+usersRoute.post('/', authMiddleware, postValidationUsers(), errorValidationBlogs, async (req: RequestWithBody<CreateUserModel>, res: Response) => {
 
     const newUser = await usersService.createUser(req.body)
 
@@ -44,7 +44,6 @@ usersRoute.post('/', authMiddleware, postValidationUsers(), errorValidationBlogs
     } else {
          res.sendStatus(STATUS_CODE.BAD_REQUEST_400)
     }
-    return null;
 
 })
 
