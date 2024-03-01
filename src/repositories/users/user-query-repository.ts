@@ -65,7 +65,7 @@ export const userQueryRepository = {
             items: users.map(userMaper)
         }
     },
-}
+
 
 /*
 let filter: {/!*it's type*!/ $or: object[] }  = {$or: []}
