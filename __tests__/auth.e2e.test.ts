@@ -40,7 +40,7 @@ describe('/auth',()=>{
             .post('/auth/login')
             .send({ loginOrEmail: loginNewUser,
                 password: passwordNewUser})
-            .expect(STATUS_CODE.CREATED_201)
+            .expect(STATUS_CODE.NO_CONTENT_204)
     })
 
 })

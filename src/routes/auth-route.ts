@@ -19,7 +19,7 @@ debugger
     const isExistUser = await authService.findUserInDataBase(req.body)
 
     if (isExistUser) {
-        return res.sendStatus(STATUS_CODE.CREATED_201)
+        return res.sendStatus(STATUS_CODE.NO_CONTENT_204)
 
     } else {
        return  res.sendStatus(STATUS_CODE.UNAUTHORIZED_401)
