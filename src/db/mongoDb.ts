@@ -2,6 +2,7 @@ import {MongoClient} from  'mongodb'
 import dotenv from 'dotenv'
 import {Blog} from "../allTypes/blogTypes";
 import {Post} from "../allTypes/postTypes";
+import {User} from "../allTypes/userTypes";
 
 export const port = 3000
 
@@ -22,6 +23,8 @@ const db=client.db('projectHW')
 export const postsCollection=db.collection<Post>('posts')
 
 export const blogsCollection=db.collection<Blog>('blogs')
+
+export const usersCollection=db.collection<User>('users')
 
 export async function runDb(){
     try {

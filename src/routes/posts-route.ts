@@ -12,7 +12,7 @@ import {blogIdValidationPosts} from "../middlewares/postsMiddlewares/blogIdValid
 import {errorValidationBlogs} from "../middlewares/blogsMiddelwares/errorValidationBlogs";
 import {RequestWithParamsWithBody} from "../allTypes/RequestWithParamsWithBody";
 import { QueryBlogInputModal} from "../allTypes/postTypes";
-import {postsSevrice} from "../domain/posts-service";
+import {postsSevrice} from "../servisces/posts-service";
 import {postQueryRepository} from "../repositories/post-query-repository";
 import {RequestWithQuery} from "../allTypes/RequestWithQuery";
 

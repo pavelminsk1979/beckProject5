@@ -10,7 +10,7 @@ import {RequestWithBody} from "../allTypes/RequestWithBody";
 import {CreateAndUpdateBlogModel} from "../models/CreateAndUpdateBlogModel";
 import {STATUS_CODE} from "../constant-status-code";
 import {RequestWithParamsWithBody} from "../allTypes/RequestWithParamsWithBody";
-import {blogsSevrice} from "../domain/blogs-service";
+import {blogsSevrice} from "../servisces/blogs-service";
 import {blogQueryRepository} from "../repositories/blog-query-repository";
 import {RequestWithQuery} from "../allTypes/RequestWithQuery";
 import {CreatePostFromCorrectBlogInputModel, GetQueryBlogInputModal, QueryBlogInputModal} from "../allTypes/blogTypes";

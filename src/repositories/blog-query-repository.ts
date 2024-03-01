@@ -76,26 +76,6 @@ export const blogQueryRepository = {
             items: posts.map(postMaper)
         }
 
-
-        /*      const blogs = await blogsCollection
-                  .find(filter)
-                  .sort(sortBy,sortDirection)
-                  .skip((pageNumber-1)*pageSize)
-                  .limit(pageSize)
-                  .toArray()
-
-              const totalCount = await blogsCollection.countDocuments(filter)
-
-              const pagesCount=Math.ceil(totalCount/pageSize)
-
-
-              return{
-                  pagesCount,
-                  page:pageNumber,
-                  pageSize,
-                  totalCount,
-                  items:blogs.map(blogMaper)
-              }*/
     },
 
 

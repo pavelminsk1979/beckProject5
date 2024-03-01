@@ -1,5 +1,5 @@
 import {CreateAndUpdateBlogModel} from "../models/CreateAndUpdateBlogModel";
-import {blogsCollection, postsCollection} from "../db/mongoDb";
+import {blogsCollection} from "../db/mongoDb";
 import {ObjectId} from "mongodb";
 import {Blog} from "../allTypes/blogTypes";
 
