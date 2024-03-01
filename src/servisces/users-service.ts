@@ -2,6 +2,7 @@ import {CreateUserModel, OutputUser} from "../allTypes/userTypes";
 import bcrypt from "bcrypt"
 import {usersRepository} from "../repositories/users/users-repository";
 import {userQueryRepository} from "../repositories/users/user-query-repository";
+import {hashPasswordService} from "./hash-password-service";
 
 
 export const usersService = {
@@ -11,7 +12,7 @@ export const usersService = {
         const {login, password, email} = requestBodyUser
 
 
-        const passwordHash = await bcryptService.generateHash(password)
+        const passwordHash = await hashPasswordService.generateHash(password)
 
 
         const newUser = {
@@ -52,17 +53,7 @@ const user =  await userQueryRepository.findUserById(idNewUser)
 
 }
 
-export const bcryptService = {
 
-    async generateHash(password:string) {
-        const  salt = await  bcrypt.genSalt(10)
-        return bcrypt.hash(password,salt)
-    },
-
-    async checkPassword(password:string,hash:string){
-        return bcrypt.compare(password,hash)
-    }
-}
 
 
 

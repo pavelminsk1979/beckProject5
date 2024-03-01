@@ -7,15 +7,14 @@ const  req = supertest(app)
 
 describe('/users',()=>{
 
- /*   beforeAll(async ()=>{
+    beforeAll(async ()=>{
         await req
             .delete ('/testing/all-data')
-    })*/
+    })
 
 
     let idNewUser:string
 
-    //let incorrectBlogId='63189b06003380064c4193be'
 
     const loginPasswordBasic64='YWRtaW46cXdlcnR5'
 
@@ -34,63 +33,6 @@ describe('/users',()=>{
         expect(res.body.email).toEqual('pavelPavel@mail.ru')
         expect(res.body.id).toEqual(idNewUser)
     })
-
-
-   /* it(' POST   create  newPost  for exits Blog)', async ()=> {
-        const res =await req
-            .post(`/blogs/${idNewBlog}/posts`)
-            .set('Authorization', `Basic ${loginPasswordBasic64}`)
-            .send({ title: 'title',
-                shortDescription: 'shortDescription',
-                content:'content' })
-            .expect(STATUS_CODE.CREATED_201)
-
-        const createdPost = res.body
-        //console.log(createdPost)
-        expect(createdPost.title).toEqual('title')
-
-    })*/
-
-/*    it('Get posts for correct  blog',async ()=>{
-        const res = await req
-            .get(`/blogs/${idNewBlog}/posts`)
-            .expect(STATUS_CODE.SUCCESS_200)
-
-        expect(res.body).toEqual({ pagesCount: 0, page: 1, pageSize: 10, totalCount: 0, items: [] })
-
-    })*/
-
-
-/*    it('Get posts for incorrect  blog',async ()=>{
-        const res = await req
-            .get(`/blogs/${incorrectBlogId}/posts`)
-            .expect(STATUS_CODE.NOT_FOUND_404)
-
-    })
-
-
-    it(' POST   create  newPost  for exits Blog)', async ()=> {
-        const res =await req
-            .post(`/blogs/${idNewBlog}/posts`)
-            .set('Authorization', `Basic ${loginPasswordBasic64}`)
-            .send({ title: 'title',
-                shortDescription: 'shortDescription',
-                content:'content' })
-            .expect(STATUS_CODE.CREATED_201)
-
-const createdPost = res.body
-        //console.log(createdPost)
-        expect(createdPost.title).toEqual('title')
-
-    })
-
-
-    it('Get posts for correct  blog',async ()=>{
-        const res = await req
-            .get(`/blogs/${idNewBlog}/posts`)
-            .expect(STATUS_CODE.SUCCESS_200)
-    })*/
-
 
 
 })

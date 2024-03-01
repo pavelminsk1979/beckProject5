@@ -1,11 +1,11 @@
 import {Response, Router} from "express";
 import {RequestWithBody} from "../allTypes/RequestWithBody";
-import {CreateUserModel, OutputUser,} from "../allTypes/userTypes";
 import {errorValidationBlogs} from "../middlewares/blogsMiddelwares/errorValidationBlogs";
-import {usersService} from "../servisces/users-service";
 import {STATUS_CODE} from "../constant-status-code";
 import {loginAndEmailValidationAuth} from "../middlewares/authMiddleware/loginAndEmailValidationAuth";
 import {passwordValidationAuth} from "../middlewares/authMiddleware/passwordValidationAuth";
+import {AuthModel} from "../allTypes/authTypes";
+import {authService} from "../servisces/auth-service";
 
 
 
@@ -14,28 +14,20 @@ export const authRoute = Router({})
 const postValidationAuth = () => [loginAndEmailValidationAuth, passwordValidationAuth]
 
 
-authRoute.post('/login', postValidationAuth(), errorValidationBlogs, async (req: RequestWithBody<CreateUserModel>, res: Response): Promise<OutputUser | null> => {
+authRoute.post('/login', postValidationAuth(), errorValidationBlogs, async (req: RequestWithBody<AuthModel>, res: Response)=> {
+debugger
+    const isExistUser = await authService.findUserInDataBase(req.body)
 
-    const newUser = await usersService.createUser(req.body)
-
-    if (newUser) {
-        res.status(STATUS_CODE.CREATED_201).send(newUser)
+    if (isExistUser) {
+        return res.sendStatus(STATUS_CODE.CREATED_201)
 
     } else {
-        res.sendStatus(STATUS_CODE.BAD_REQUEST_400)
+       return  res.sendStatus(STATUS_CODE.UNAUTHORIZED_401)
     }
-    return null;
 
 })
 
 
-/*usersRoute.get('/', authMiddleware,async(req: RequestWithQuery<QueryUsersInputModal>, res: Response):Promise<Response<PaginationWithOutputUser<OutputUser>>> => {
-
-const users = await userQueryRepository.getUsers(req.query)
-
-    return res.status(STATUS_CODE.SUCCESS_200).send(users)
-
-})*/
 
 
 

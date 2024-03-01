@@ -7,6 +7,13 @@ import {queryParamsValidationUsers} from "../../middlewares/usersMiddlewares/que
 
 export const userQueryRepository = {
 
+    async findUserByLoginOrEmail(loginOrEmail:string){
+
+        const user = await usersCollection.findOne({$or:[{login:loginOrEmail},{email:loginOrEmail}]})
+        return user
+    },
+
+
     async findUserById(id: string):Promise<OutputUser|null> {
         const user = await usersCollection.findOne({_id: new ObjectId(id)})
         if (!user) return null
