@@ -26,25 +26,24 @@ export const userQueryRepository = {
 
        const {pageNumber,pageSize,sortBy,sortDirection,searchLoginTerm,searchEmailTerm}=queryParamsValidationUsers(queryParams)
 
-        let filter = {}
-        if (searchLoginTerm) {
-            filter = {
-                login: {
-                    $regex: searchLoginTerm,
-                    $options: 'i'
-                }
-            }
+
+        let filter: {/*it's type*/ $or: object[] }  = {$or: []}
+
+        if(searchLoginTerm){
+            filter.$or.push({
+                login:{  $regex: searchLoginTerm,
+                    $options: 'i'}
+            })
         }
-        if (searchEmailTerm) {
-            filter = {
-                ...filter,
+
+        if(searchEmailTerm){
+            filter.$or.push({
                 email: {
                     $regex: searchEmailTerm,
                     $options: 'i',
-                },
-            };
+                }
+            })
         }
-
 
         const users = await usersCollection
             .find(filter)
@@ -84,4 +83,26 @@ if(searchEmailTerm){
             $options: 'i',
         }
     })
+}*/
+
+
+/*
+fix.    этот комит - была 1 ошибка
+let filter = {}
+if (searchLoginTerm) {
+    filter = {
+        login: {
+            $regex: searchLoginTerm,
+            $options: 'i'
+        }
+    }
+}
+if (searchEmailTerm) {
+    filter = {
+        ...filter,
+        email: {
+            $regex: searchEmailTerm,
+            $options: 'i',
+        },
+    };
 }*/
