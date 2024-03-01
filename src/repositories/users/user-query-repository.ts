@@ -65,8 +65,23 @@ export const userQueryRepository = {
             items: users.map(userMaper)
         }
     },
-
-
-
-
 }
+
+/*
+let filter: {/!*it's type*!/ $or: object[] }  = {$or: []}
+
+if(searchLoginTerm){
+    filter.$or.push({
+        login:{  $regex: searchLoginTerm,
+            $options: 'i'}
+    })
+}
+
+if(searchEmailTerm){
+    filter.$or.push({
+        email: {
+            $regex: searchEmailTerm,
+            $options: 'i',
+        }
+    })
+}*/
