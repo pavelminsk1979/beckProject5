@@ -24,11 +24,11 @@ export const usersRoute = Router({})
 const postValidationUsers = () => [loginValidationUsers, passwordValidationUsers, emailValidationUsers]
 
 
-usersRoute.get('/', authMiddleware,async(req: RequestWithQuery<QueryUsersInputModal>, res: Response):Promise<Response<PaginationWithOutputUser<OutputUser>>> => {
+usersRoute.get('/', authMiddleware,async(req: RequestWithQuery<QueryUsersInputModal>, res: Response)=> {
 
 const users = await userQueryRepository.getUsers(req.query)
 
-    return res.status(STATUS_CODE.SUCCESS_200).send(users)
+     res.status(STATUS_CODE.SUCCESS_200).send(users)
 
 })
 

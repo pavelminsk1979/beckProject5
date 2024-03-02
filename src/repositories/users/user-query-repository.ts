@@ -1,4 +1,4 @@
-import { usersCollection} from "../../db/mongoDb";
+import {usersCollection} from "../../db/mongoDb";
 import {ObjectId} from "mongodb";
 import {userMaper} from "../../mapers/userMaper";
 import {OutputUser, PaginationWithOutputUser, QueryUsersInputModal} from "../../allTypes/userTypes";
@@ -7,36 +7,45 @@ import {queryParamsValidationUsers} from "../../middlewares/usersMiddlewares/que
 
 export const userQueryRepository = {
 
-    async findUserByLoginOrEmail(loginOrEmail:string){
+    async findUserByLoginOrEmail(loginOrEmail: string) {
 
-        const user = await usersCollection.findOne({$or:[{login:loginOrEmail},{email:loginOrEmail}]})
+        const user = await usersCollection.findOne({$or: [{login: loginOrEmail}, {email: loginOrEmail}]})
         return user
     },
 
 
-    async findUserById(id: string):Promise<OutputUser|null> {
+    async findUserById(id: string): Promise<OutputUser | null> {
         const user = await usersCollection.findOne({_id: new ObjectId(id)})
         if (!user) return null
 
-            return userMaper(user)
+        return userMaper(user)
     },
 
 
-    async getUsers(queryParams:QueryUsersInputModal):Promise<PaginationWithOutputUser<OutputUser>>{
+    async getUsers(queryParams: QueryUsersInputModal): Promise<PaginationWithOutputUser<OutputUser>> {
 
-       const {pageNumber,pageSize,sortBy,sortDirection,searchLoginTerm,searchEmailTerm}=queryParamsValidationUsers(queryParams)
+        const {
+            pageNumber,
+            pageSize,
+            sortBy,
+            sortDirection,
+            searchLoginTerm,
+            searchEmailTerm
+        } = queryParamsValidationUsers(queryParams)
 
 
-        let filter: {/*it's type*/ $or: object[] }  = {$or: []}
+        let filter: {/*it's type*/ $or: object[] } = {$or: []}
 
-        if(searchLoginTerm){
+        if (searchLoginTerm) {
             filter.$or.push({
-                login:{  $regex: searchLoginTerm,
-                    $options: 'i'}
+                login: {
+                    $regex: searchLoginTerm,
+                    $options: 'i'
+                }
             })
         }
 
-        if(searchEmailTerm){
+        if (searchEmailTerm) {
             filter.$or.push({
                 email: {
                     $regex: searchEmailTerm,
@@ -46,13 +55,14 @@ export const userQueryRepository = {
         }
 
         const users = await usersCollection
-            .find(filter)
+            .find(filter.$or.length ? filter : {})
+
             .sort(sortBy, sortDirection)
             .skip((pageNumber - 1) * pageSize)
             .limit(pageSize)
             .toArray()
 
-        const totalCount = await usersCollection.countDocuments(filter)
+        const totalCount = await usersCollection.countDocuments(filter.$or.length ? filter : {})
 
         const pagesCount = Math.ceil(totalCount / pageSize)
 
@@ -63,7 +73,8 @@ export const userQueryRepository = {
             totalCount,
             items: users.map(userMaper)
         }
-    }}
+    }
+}
 
 
 /*
