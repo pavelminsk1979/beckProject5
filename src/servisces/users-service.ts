@@ -1,5 +1,4 @@
 import {CreateUserModel, OutputUser} from "../allTypes/userTypes";
-import bcrypt from "bcrypt"
 import {usersRepository} from "../repositories/users/users-repository";
 import {userQueryRepository} from "../repositories/users/user-query-repository";
 import {hashPasswordService} from "./hash-password-service";
@@ -38,18 +37,6 @@ const user =  await userQueryRepository.findUserById(idNewUser)
         return usersRepository.deleteUserById(id)
     },
 
-
-
-/*    async findById (id:string) {
-        return await usersRepository.doesExistById(id)
-    },
-
-    async delete (id:string) {
-        const user = await usersRepository.findById(id);
-        if(!user) return false
-
-        return  await usersRepository.delete(id)
-    }*/
 
 }
 

@@ -6,7 +6,6 @@ import {hashPasswordService} from "./hash-password-service";
 export const authService = {
 
     async findUserInDataBase(requestBody:AuthModel){
-        debugger
 
         const {loginOrEmail,password}=requestBody
 
