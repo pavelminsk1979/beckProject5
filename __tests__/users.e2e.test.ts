@@ -13,25 +13,60 @@ describe('/users',()=>{
     })
 
 
-    let idNewUser:string
+    let idNewUser1:string
+    let idNewLogin:string
+    let idNewEmail:string
+    let idNewUser2:string
 
 
     const loginPasswordBasic64='YWRtaW46cXdlcnR5'
 
     it('POST create newUsers',async ()=>{
-        const res =await req
+
+        const res2=await req
             .post('/users')
             .set('Authorization', `Basic ${loginPasswordBasic64}`)
-            .send({ login: '3333996',
-                password: '9999953',
+            .send({ login: 'login123',
+                password: '11111111',
+                email:'pavPav@mail.ru'})
+
+        idNewUser2=res2.body.id
+
+            ////////////////
+
+        const res1 =await req
+            .post('/users')
+            .set('Authorization', `Basic ${loginPasswordBasic64}`)
+            .send({ login: 'log111',
+                password: '55555555',
                 email:'pavelPavel@mail.ru'})
             .expect(STATUS_CODE.CREATED_201)
 
-        idNewUser=res.body.id
+        idNewUser1=res1.body.id
+        idNewLogin=res1.body.login
+        idNewEmail=res1.body.email
 
-        expect(res.body.login).toEqual('3333996')
-        expect(res.body.email).toEqual('pavelPavel@mail.ru')
-        expect(res.body.id).toEqual(idNewUser)
+        expect(res1.body.login).toEqual(idNewLogin)
+        expect(res1.body.email).toEqual(idNewEmail)
+        expect(res1.body.id).toEqual(idNewUser1)
+
+
+    })
+
+
+
+    it('get users',async ()=>{
+        const res = await req
+            .get('/users')
+            .set('Authorization', `Basic ${loginPasswordBasic64}`)
+            .expect(STATUS_CODE.SUCCESS_200)
+
+        //console.log(res.body.items)
+
+            expect(res.body.items[0].id).toEqual(idNewUser1)
+            expect(res.body.items[0].login).toEqual(idNewLogin)
+            expect(res.body.items[0].email).toEqual(idNewEmail)
+
     })
 
 
